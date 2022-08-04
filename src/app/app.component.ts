@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PaisesService } from './paises.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'PaisesEuropa';
+
+  paises: any[];
+
+  constructor(private paisesService: PaisesService) {
+
+  }
+
+  ngOnInit() {
+    this.paisesService.getAll()
+      .then(response => this.paises = response)
+      .catch(error => console.log(error));
+  }
+
 }
